@@ -1,7 +1,7 @@
 rm(list = ls())
-library(tuneR);library(data.table);library(ggplot2)
+library(tuneR);library(data.table);library(ggplot2);library(seewave)
 
-nt.margin <- 0.008; maxtoff <- 0.01; t.resolution <- 0.001;wlcorr <- 512;ovlp=80; printspectro=F
+maxtoff <- 0.5; t.resolution <- 0.001;wlcorr <- 512;ovlp=80; printspectro=F
 
 note1 <- readWave('') # Directory to a wave file containing a single, isolated note
 note2 <- readWave('') # Directory to a wave file containing a single, isolated note. Then one to be compared to note1
@@ -9,17 +9,18 @@ note2 <- readWave('') # Directory to a wave file containing a single, isolated n
 
 samp.rate=note1@samp.rate
 n1 <- normalize(note1, unit='1', rescale=T, pcm=note1@pcm)
-n1 <- as.matrix(n1@left) 
+n1 <- as.matrix(n1@left)
+n1 <- as.matrix(c(rep(0, length=round(samp.rate*maxtoff)),n1))
 n2<- normalize(note2, unit='1', rescale=T, pcm=note2@pcm)
 n2 <- as.matrix(n2@left)
 
-max.duration <- as.integer((max(length(n1)/samp.rate, length(n2)/samp.rate)+nt.margin*2+maxtoff*2)*samp.rate)
-if(max.duration > length(n1)){n1 <- as.matrix(c(n1, rep(0, length=samp.rate)))}
+max.duration <- as.integer((max(length(n1)/samp.rate, length(n2)/samp.rate)+maxtoff*2)*samp.rate)
+if(max.duration > length(n1)){n1 <- as.matrix(c(n1, rep(0, length=samp.rate*5)))}
 n1.adj <- as.matrix(n1[1:max.duration,])
-if(max.duration > length(n2)){n2 <- as.matrix(c(n2, rep(0, length=samp.rate)))}
+if(max.duration > length(n2)){n2 <- as.matrix(c(n2, rep(0, length=samp.rate*5)))}
 n2 <- as.matrix(n2[1:max.duration,])
 
-t.displace <- seq(0, maxtoff*2, by=t.resolution2);t.loc <- t.displace-maxtoff
+t.displace <- seq(0, maxtoff*2, by=t.resolution);t.loc <- t.displace-maxtoff
 n1_mat <- seewave::sspectro(n1.adj, samp.rate,wl=wlcorr, ovlp=ovlp) # Transform sound wave into spectrogram matrix
 
 ## This is the SPCC function strictly speaking, previous codes are necessary steps to prepare the sound files
