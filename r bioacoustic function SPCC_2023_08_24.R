@@ -1,4 +1,3 @@
-rm(list = ls())
 library(tuneR);library(data.table);library(ggplot2);library(seewave)
 
 maxtoff <- 0.01; t.resolution <- 0.001;wlcorr <- 512;ovlp=80; printspectro=F
