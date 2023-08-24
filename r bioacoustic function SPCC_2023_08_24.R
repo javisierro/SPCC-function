@@ -1,7 +1,7 @@
 rm(list = ls())
 library(tuneR);library(data.table);library(ggplot2)
 
-nt.margin <- 0.008; maxtoff <- 0.01; t.resolution2 <- 0.001;wlcorr <- 512;ovlp=80; printspectro=F
+nt.margin <- 0.008; maxtoff <- 0.01; t.resolution <- 0.001;wlcorr <- 512;ovlp=80; printspectro=F
 
 note1 <- readWave('') # Directory to a wave file containing a single, isolated note
 note2 <- readWave('') # Directory to a wave file containing a single, isolated note. Then one to be compared to note1
