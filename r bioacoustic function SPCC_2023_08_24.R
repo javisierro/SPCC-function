@@ -4,8 +4,8 @@ library(tuneR);library(data.table);library(ggplot2);library(seewave)
 maxtoff <- 0.01; t.resolution <- 0.001;wlcorr <- 512;ovlp=80; printspectro=F
 ## The default maxtoff might be too small for certain cases. This should be adjusted depending on the length of notes being compared. ## i.e. maxtoff <- 0.2
 
-note1 <- readWave('/Users/javiersierro/Biology/2017-21 Lancaster/bioacoustic r protocols/bioacoustic protocol blue tit/SPCC-function/p4_c7_bird_01_bg_060_tag_07_file_3_(2021_07_15-05_54_59)_ASWMUX221163@221163@2021_07_15-05_54_59@45@12851422-12856177.wav') # Directory to a wave file containing a single, isolated note
-note2 <- readWave('/Users/javiersierro/Biology/2017-21 Lancaster/bioacoustic r protocols/bioacoustic protocol blue tit/SPCC-function/p4_c7_bird_01_bg_060_tag_07_file_3_(2021_07_15-05_54_59)_ASWMUX221163@221163@2021_07_15-05_54_59@45@12957077-12964082.wav') # Directory to a wave file containing a single, isolated note. Then one to be compared to note1
+note1 <- readWave('') # Directory to a wave file containing a single, isolated note
+note2 <- readWave('') # Directory to a wave file containing a single, isolated note. Then one to be compared to note1
 
 
 samp.rate=note1@samp.rate
